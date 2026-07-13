@@ -151,12 +151,6 @@ def main(config: dict,
     
     provider = config["model"].get("provider", "vllm")
 
-    # Validate local model path early
-    if provider == "local":
-        local_path = config["model"].get("path", model_name)
-        if not os.path.exists(local_path):
-            raise FileNotFoundError(f"Local model path not found: {local_path}")
-
     # ========== Prompt Generation ==========
     if do_prompt_generation:
         run_prompt_generation(config, prompt_output_file)

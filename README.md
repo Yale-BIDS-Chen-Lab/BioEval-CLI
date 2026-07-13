@@ -142,7 +142,7 @@ prompt:
 # Model Inference Settings
 # ------------------------------
 model:
-  provider: hf                                # Model provider: hf | vllm | azure | google | anthropic | local
+  provider: hf                                # Model provider: hf | vllm | azure | google | anthropic
   name: "meta-llama/Llama-3.2-3B-Instruct"    # Model identifier
 
 inference:

@@ -63,8 +63,6 @@ def run_model_inference(config: Dict[str, Any], input_file: str, output_file: st
         _run_google_inference(config, input_file, output_file, model_name)
     elif provider == "anthropic":
         _run_anthropic_inference(config, input_file, output_file, model_name)
-    elif provider == "local":
-        _run_local_inference(config, input_file, output_file, model_name)
     else:
         raise ValueError(f"Unknown provider '{provider}'")
 
@@ -186,27 +184,6 @@ def _run_anthropic_inference(config: Dict[str, Any], input_file: str, output_fil
     if cfg.get("api_key"):
         inference_args += ["--api_key", str(cfg["api_key"])]
     for key in ("temperature", "max_tokens"):
-        val = cfg.get(key)
-        if val is not None:
-            inference_args += [f"--{key}", str(val)]
-    subprocess.run(inference_args, check=True)
-
-
-def _run_local_inference(config: Dict[str, Any], input_file: str, output_file: str, model_name: str) -> None:
-    """Run local model inference."""
-    inference_script = "src/providers/local.py"
-    cfg = config["inference"]
-    inference_args = [
-        "python3", inference_script,
-        "--model", model_name,
-        "--input_file", input_file,
-        "--output_file", output_file,
-    ]
-    # Add optional local parameters
-    for key in [
-        "max_new_tokens", "do_sample", "temperature", "top_k", "top_p",
-        "num_beams", "repetition_penalty", "length_penalty"
-    ]:
         val = cfg.get(key)
         if val is not None:
             inference_args += [f"--{key}", str(val)]
