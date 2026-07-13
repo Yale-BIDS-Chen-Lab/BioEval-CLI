@@ -142,7 +142,7 @@ prompt:
 # Model Inference Settings
 # ------------------------------
 model:
-  provider: hf                                # Model provider: hf | vllm | azure | local
+  provider: hf                                # Model provider: hf | vllm | azure | google | anthropic | local
   name: "meta-llama/Llama-3.2-3B-Instruct"    # Model identifier
 
 inference:
@@ -201,6 +201,43 @@ inference:
   api_version: "2025-01-01-preview"
   api_key: "your-api-key"
   temperature: 0.7
+  max_tokens: 512
+```
+
+For **reasoning models** — the `o1`/`o3`/`o4` and `gpt-5` families (e.g. `gpt-5.4`) — sampling parameters (`temperature`, `top_p`, penalties) are ignored; use `max_completion_tokens` and, optionally, `reasoning_effort`:
+```yaml
+model:
+  provider: azure
+  name: "gpt-5"
+inference:
+  endpoint: "https://your-resource.openai.azure.com/"
+  api_version: "2025-01-01-preview"
+  api_key: "your-api-key"
+  max_completion_tokens: 4096
+  reasoning_effort: medium        # model-specific, e.g. minimal | low | medium | high
+```
+
+### Google Gemini
+```yaml
+model:
+  provider: google
+  name: "gemini-2.5-pro"
+inference:
+  api_key: "your-api-key"          # or set GOOGLE_API_KEY / GEMINI_API_KEY
+  temperature: 0.7
+  top_p: 0.95
+  max_tokens: 4096
+```
+
+### Anthropic (Claude)
+```yaml
+model:
+  provider: anthropic
+  name: "claude-sonnet-4-5"
+inference:
+  api_key: "your-api-key"          # or set ANTHROPIC_API_KEY
+  temperature: 0.7
+  max_tokens: 4096
 ```
 
 ---

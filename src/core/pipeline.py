@@ -59,6 +59,10 @@ def run_model_inference(config: Dict[str, Any], input_file: str, output_file: st
         _run_vllm_inference(config, input_file, output_file, model_name)
     elif provider == "hf":
         _run_hf_inference(config, input_file, output_file, model_name)
+    elif provider == "google":
+        _run_google_inference(config, input_file, output_file, model_name)
+    elif provider == "anthropic":
+        _run_anthropic_inference(config, input_file, output_file, model_name)
     elif provider == "local":
         _run_local_inference(config, input_file, output_file, model_name)
     else:
@@ -146,6 +150,42 @@ def _run_hf_inference(config: Dict[str, Any], input_file: str, output_file: str,
         "sequence_bias", "guidance_scale", "low_memory", "num_beams",
         "num_beam_groups", "penalty_alpha", "use_cache"
     ]:
+        val = cfg.get(key)
+        if val is not None:
+            inference_args += [f"--{key}", str(val)]
+    subprocess.run(inference_args, check=True)
+
+
+def _run_google_inference(config: Dict[str, Any], input_file: str, output_file: str, model_name: str) -> None:
+    """Run Google Gemini inference."""
+    cfg = config["inference"]
+    inference_args = [
+        "python3", "src/providers/google.py",
+        "--model", model_name,
+        "--input_file", input_file,
+        "--output_file", output_file,
+    ]
+    if cfg.get("api_key"):
+        inference_args += ["--api_key", str(cfg["api_key"])]
+    for key in ("temperature", "top_p", "max_tokens"):
+        val = cfg.get(key)
+        if val is not None:
+            inference_args += [f"--{key}", str(val)]
+    subprocess.run(inference_args, check=True)
+
+
+def _run_anthropic_inference(config: Dict[str, Any], input_file: str, output_file: str, model_name: str) -> None:
+    """Run Anthropic (Claude) inference."""
+    cfg = config["inference"]
+    inference_args = [
+        "python3", "src/providers/anthropic.py",
+        "--model", model_name,
+        "--input_file", input_file,
+        "--output_file", output_file,
+    ]
+    if cfg.get("api_key"):
+        inference_args += ["--api_key", str(cfg["api_key"])]
+    for key in ("temperature", "max_tokens"):
         val = cfg.get(key)
         if val is not None:
             inference_args += [f"--{key}", str(val)]

@@ -338,6 +338,16 @@ Examples:
         if args.reasoning_effort is not None:
             params["reasoning_effort"] = args.reasoning_effort
 
+        # Reasoning models (the o1/o3/o4 and gpt-5 families) use
+        # max_completion_tokens + reasoning_effort and reject sampling
+        # parameters; remap and strip to match the BioEval web app.
+        if args.model.lower().startswith(("o1", "o3", "o4", "gpt-5")):
+            if "max_tokens" in params:
+                params["max_completion_tokens"] = params.pop("max_tokens")
+            params.setdefault("max_completion_tokens", 4096)
+            _keep = {"model", "messages", "max_completion_tokens", "reasoning_effort"}
+            params = {k: v for k, v in params.items() if k in _keep}
+
         # Make the API call with retries
         retries = 0
         while retries <= args.max_retries:
