@@ -163,24 +163,44 @@ def load_raw_data(file_path: str) -> Tuple[List, List]:
 def process_mcq_custom_single(output: str, option_type: str) -> str:
     """Extract the selected option from a model output.
 
-    option_type: "A-E" (a,b,c,d,e), "A-D" (a,b,c,d), or "Yes/No/Maybe".
+    Mirrors the web app's parser.process_mcq_option. ``option_type`` uses the
+    same comma-separated forms the web app configures:
+
+      - "A, B, C, D, E" / "A, B, C, D" / "A, B, C" -> the first character, if it
+        is one of the option letters, else "missing".
+      - "Yes, No, Maybe" / "True, False" / "Positive, Negative" -> the first of
+        those words found anywhere in the output, else "missing".
+
+    Any unrecognized option_type yields "missing" (the web app never raises).
     """
     if not output or not output.strip():
         return "missing"
 
     output = output.lower().strip()
 
-    if option_type == "A-E":
+    if option_type == "A, B, C, D, E":
         return output[0] if output[0] in {"a", "b", "c", "d", "e"} else "missing"
-    elif option_type == "A-D":
+    elif option_type == "A, B, C, D":
         return output[0] if output[0] in {"a", "b", "c", "d"} else "missing"
-    elif option_type == "Yes/No/Maybe":
+    elif option_type == "A, B, C":
+        return output[0] if output[0] in {"a", "b", "c"} else "missing"
+    elif option_type == "Yes, No, Maybe":
         for label in ["yes", "no", "maybe"]:
             if label in output:
                 return label
         return "missing"
+    elif option_type == "True, False":
+        for label in ["true", "false"]:
+            if label in output:
+                return label
+        return "missing"
+    elif option_type == "Positive, Negative":
+        for label in ["positive", "negative"]:
+            if label in output:
+                return label
+        return "missing"
     else:
-        raise ValueError(f"Unsupported option_type: {option_type}. Use 'A-E', 'A-D', or 'Yes/No/Maybe'")
+        return "missing"
 
 
 def process_mcq_custom(file_path: str, option_type: str) -> Tuple[List[str], List[str]]:

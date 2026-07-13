@@ -15,7 +15,7 @@ def main():
     parser.add_argument('--postprocessing', type=str, default=None,
                         help="Explicit postprocessing function name (e.g., load_normalized_data, process_mcq_custom).")
     parser.add_argument('--label_string', type=str, default=None,
-                        help="Comma-separated string of labels for process_mlc_custom or option type for process_mcq_custom (e.g., A-E, Yes/No/Maybe).")
+                        help="Comma-separated string of labels for process_mlc_custom or option type for process_mcq_custom (e.g., 'A, B, C, D', 'Yes, No, Maybe').")
 
     args = parser.parse_args()
 

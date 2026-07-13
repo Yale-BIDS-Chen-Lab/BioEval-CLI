@@ -5,7 +5,7 @@ from typing import Dict, List
 class MCQTask:
     """Handler for Multiple Choice Questions tasks"""
     
-    def postprocess(self, output: str, label_string: str = "A-E") -> str:
+    def postprocess(self, output: str, label_string: str = "A, B, C, D, E") -> str:
         """
         Process model output for MCQ tasks.
         

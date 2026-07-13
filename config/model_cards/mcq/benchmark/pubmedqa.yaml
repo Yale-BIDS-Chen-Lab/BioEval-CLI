@@ -33,7 +33,7 @@ inference:
 # ------------------------------
 evaluation:
   postprocessing: process_mcq_custom         # Parse and extract multiple-choice answer from model output.
-  labels: Yes/No/Maybe                       # Option type: Yes, No, Maybe
+  labels: Yes, No, Maybe                     # Option type: Yes, No, Maybe
   output_file: null  # Will be auto-named as pubmedqa_[hash].json. All pipeline stages update this single file by default.
   metrics:
     - accuracy

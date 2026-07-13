@@ -33,7 +33,7 @@ inference:
 # ------------------------------
 evaluation:
   postprocessing: process_mcq_custom         # Parse and extract multiple-choice answer from model output.
-  labels: A-E                                # Option type: A, B, C, D, E
+  labels: A, B, C, D, E                      # Option type: A, B, C, D, E
   output_file: null  # Will be auto-named as medqa_[hash].json. All pipeline stages update this single file by default.
   metrics:
     - accuracy
