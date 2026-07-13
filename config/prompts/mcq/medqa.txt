@@ -1,0 +1,4 @@
+Your task is to answer medical questions with the provided choices. Only output the answer option (A/B/C/D) as answer.
+
+Input:{{input}}
+Output:

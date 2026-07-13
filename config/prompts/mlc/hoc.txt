@@ -1,0 +1,16 @@
+The task is to perform a semantic classification of the article according to the hallmarks of cancer based on its abstract. The input is an abstract text. 
+There are 10 cancer hallmarks you will need to decide whether the article is related to, including: 
+activating invasion and metastasis 
+sustaining proliferative signaling 
+resisting cell death 
+cellular energetics 
+genomic instability and mutation 
+evading growth suppressors 
+inducing angiogenesis 
+enabling replicative immortality 
+avoiding immune destruction 
+tumor promoting inflammation 
+The output should be topics from the above 10 topics that are related to the input article. Please note one article can be related to multiple topics. Output format: provide a semicolon-separated list of relevant topics.
+
+Input:{{input}}
+Output:

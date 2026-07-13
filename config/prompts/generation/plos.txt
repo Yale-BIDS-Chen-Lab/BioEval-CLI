@@ -1,0 +1,4 @@
+The task is to simplify the input abstract of a biomedical literature.
+
+Input:{{input}}
+Output:

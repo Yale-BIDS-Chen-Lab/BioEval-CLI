@@ -1,0 +1,4 @@
+The task is to summarize an input biomedical literature in six sentences.
+
+Input:{{input}}
+Output:

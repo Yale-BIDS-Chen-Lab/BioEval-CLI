@@ -1,0 +1,19 @@
+[
+  {
+    "id": 0,
+    "input": "Clustering of missense mutations in the ataxia - telangiectasia gene in a sporadic T - cell leukaemia .",
+    "reference": [
+      [6, 8, "Disease"],  
+      [12, 16, "Disease"]
+    ]
+  },
+  {
+    "id": 1,
+    "input": "Ataxia - telangiectasia ( A - T ) is a recessive multi - system disorder caused by mutations in the ATM gene at 11q22 - q23 ( ref . 3 ) .",
+    "reference": [
+      [0, 2, "Disease"],  
+      [4, 6, "Disease"],  
+      [10, 14, "Disease"]
+    ]
+  }
+]

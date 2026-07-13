@@ -1,0 +1,40 @@
+# ------------------------------
+#  Task and Dataset Settings
+# ------------------------------
+task: generation 
+dataset: pubmed_summarization  # Dataset identifier/name for organizing and querying experiments
+
+data_files:
+  test_file: "data/datasets/samples/pubmed_summarization_test_samples.json"
+  train_file:
+
+# ------------------------------
+#  Prompt Generation Settings
+# ------------------------------
+prompt:
+  system_prompt: "config/prompts/generation/pubmed_summarization.txt"
+  shot_indices:  # Omit for zero-shot, or "0,1,2" for 3-shot
+  output_file: null  # Will be auto-named as pubmed_summarization_[hash].json. All pipeline stages update this single file by default.
+
+# ------------------------------
+#  Model Inference Settings
+# ------------------------------
+model:
+  provider: hf
+  name: "meta-llama/Llama-3.2-1B-Instruct"
+
+inference:
+  temperature: 0.5
+  max_new_tokens: 200
+  output_file: null  # Will be auto-named as pubmed_summarization_[hash].json. All pipeline stages update this single file by default.
+
+# ------------------------------
+#  Evaluation Settings
+# ------------------------------
+evaluation:
+  postprocessing: load_normalized_data       # Text normalization: lowercase + strip leading or trailing whitespace
+  labels: null                               # No labels needed for generation tasks
+  output_file: null  # Will be auto-named as pubmed_summarization_[hash].json. All pipeline stages update this single file by default.
+  metrics:
+    - rouge1
+    - bertscore

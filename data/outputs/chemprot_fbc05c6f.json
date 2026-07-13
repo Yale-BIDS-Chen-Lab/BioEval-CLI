@@ -1,0 +1,53 @@
+{
+  "dataset_info": {
+    "task": "slc",
+    "dataset": "chemprot",
+    "test_file": "data/datasets/samples/chemprot_test_samples.json",
+    "train_file": null
+  },
+  "inference_metadata": {
+    "inference_timestamp": "2025-11-09T16:48:13.012006",
+    "model_name": "meta-llama/Llama-3.2-3B-Instruct",
+    "provider": "huggingface",
+    "inference_parameters": {
+      "temperature": 0.01,
+      "max_new_tokens": 10
+    },
+    "prompt_generation_metadata": {
+      "generation_timestamp": "2025-11-09T16:48:05.099292",
+      "system_prompt_file": "config/prompts/slc/chemprot.txt",
+      "shots": 0,
+      "shot_indices": null,
+      "seed": null
+    }
+  },
+  "evaluation_metadata": {
+    "evaluation_timestamp": "2025-11-09T16:48:27.555078",
+    "metrics": {
+      "macro_f1": 0.0,
+      "weighted_f1": 0.0
+    },
+    "postprocessing": "load_normalized_data",
+    "labels": null
+  },
+  "records": [
+    {
+      "id": "10076535.T44.T63",
+      "input": "@CHEMICAL$ antagonistic effect of estramustine phosphate (EMP) metabolites on wild-type and mutated @GENE$.",
+      "reference": "CPR:6",
+      "prompt": "The task is to classify relations between a chemical and a gene for a sentence. The input is a sentence where the chemical is labeled as @CHEMICAL$ and the gene is labeled as @GENE$ accordingly in a sentence. Your task is to select one out of the six types of relations ('CPR:3', 'CPR:4', 'CPR:5', 'CPR:6', 'CPR:9', and 'false') for the gene and chemical without any explanation or other characters: \n \nCPR:3, which includes UPREGULATOR, ACTIVATOR, and INDIRECT UPREGULATOR \nCPR:4, which includes DOWNREGULATOR, INHIBITOR, and INDIRECT DOWNREGULATOR \nCPR:5, which includes AGONIST, AGONIST ACTIVATOR, and AGONIST INHIBITOR \nCPR:6, which includes ANTAGONIST \nCPR:9, which includes SUBSTRATE, PRODUCT OF and SUBSTRATE PRODUCT OF \nfalse, which indicates no relations \n\nInput: @CHEMICAL$ antagonistic effect of estramustine phosphate (EMP) metabolites on wild-type and mutated @GENE$.\nOutput:",
+      "output": " CPR:6, CPR:9, CPR:",
+      "postprocessed_output": "cpr:6, cpr:9, cpr:",
+      "postprocessed_reference": "cpr:6"
+    },
+    {
+      "id": "10076535.T45.T63",
+      "input": "Androgen antagonistic effect of @CHEMICAL$ (EMP) metabolites on wild-type and mutated @GENE$.",
+      "reference": "CPR:6",
+      "prompt": "The task is to classify relations between a chemical and a gene for a sentence. The input is a sentence where the chemical is labeled as @CHEMICAL$ and the gene is labeled as @GENE$ accordingly in a sentence. Your task is to select one out of the six types of relations ('CPR:3', 'CPR:4', 'CPR:5', 'CPR:6', 'CPR:9', and 'false') for the gene and chemical without any explanation or other characters: \n \nCPR:3, which includes UPREGULATOR, ACTIVATOR, and INDIRECT UPREGULATOR \nCPR:4, which includes DOWNREGULATOR, INHIBITOR, and INDIRECT DOWNREGULATOR \nCPR:5, which includes AGONIST, AGONIST ACTIVATOR, and AGONIST INHIBITOR \nCPR:6, which includes ANTAGONIST \nCPR:9, which includes SUBSTRATE, PRODUCT OF and SUBSTRATE PRODUCT OF \nfalse, which indicates no relations \n\nInput: Androgen antagonistic effect of @CHEMICAL$ (EMP) metabolites on wild-type and mutated @GENE$.\nOutput:",
+      "output": " CPR:6, CPR:9, CPR:",
+      "postprocessed_output": "cpr:6, cpr:9, cpr:",
+      "postprocessed_reference": "cpr:6"
+    }
+  ]
+}

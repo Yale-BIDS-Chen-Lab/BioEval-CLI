@@ -1,0 +1,4 @@
+Your task is to answer biomedical questions using the given abstract. Only output yes, no, or maybe as answer.
+
+Input:{{input}}
+Output:

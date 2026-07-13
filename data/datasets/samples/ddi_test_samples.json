@@ -1,0 +1,12 @@
+[
+  {
+    "id": "DDI-DrugBank.d572.s0.p0",
+    "input": "@DRUG$: Concomitant @DRUG$ administration decreased the mean AUC of total ezetimibe approximately 55%.",
+    "reference": "DDI-false"
+  },
+  {
+    "id": "DDI-DrugBank.d572.s0.p1",
+    "input": "@DRUG$: Concomitant cholestyramine administration decreased the mean AUC of total @DRUG$ approximately 55%.",
+    "reference": "DDI-false"
+  }
+]

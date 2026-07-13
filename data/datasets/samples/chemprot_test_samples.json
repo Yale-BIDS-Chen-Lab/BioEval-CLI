@@ -1,0 +1,12 @@
+[
+  {
+    "id": "10076535.T44.T63",
+    "input": "@CHEMICAL$ antagonistic effect of estramustine phosphate (EMP) metabolites on wild-type and mutated @GENE$.",
+    "reference": "CPR:6"
+  },
+  {
+    "id": "10076535.T45.T63",
+    "input": "Androgen antagonistic effect of @CHEMICAL$ (EMP) metabolites on wild-type and mutated @GENE$.",
+    "reference": "CPR:6"
+  }
+]

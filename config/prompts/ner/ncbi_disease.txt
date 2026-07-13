@@ -1,0 +1,4 @@
+The task is to extract disease entities in a sentence. The output is an HTML that highlights all the disease entities with <span class="disease">entity</span> in the sentence. Only wrap the disease entities and return the complete sentence with proper HTML markup.
+
+Input:{{input}}
+Output:

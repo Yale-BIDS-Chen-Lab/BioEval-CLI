@@ -1,0 +1,4 @@
+The task is to extract chemical entities in a sentence. The output is an HTML that highlights all the chemical entities with <span class="chemical">entity</span> in the sentence. Only wrap the chemical entities and return the complete sentence with proper HTML markup.
+
+Input:{{input}}
+Output:
