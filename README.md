@@ -158,7 +158,8 @@ evaluation:
   postprocessing: process_mcq_custom          # Function to parse MCQ model outputs. 
                                               # Other functions: load_normalized_data | load_raw_data | process_ner_token_indices | process_mlc_custom
   labels: A, B, C, D                          # The parser extracts the first valid option from the model output or returns "missing" if no valid option is found
-                                              # A, B, C | A, B, C, D, E | Yes, No, Maybe
+                                              # Option type (letters -> first matching character; words -> first matching word). One of:
+                                              #   A, B, C, D, E | A, B, C, D | A, B, C | Yes, No, Maybe | True, False | Positive, Negative
                                               # For ner or mlc, specify class labels as comma-separated list (e.g., mechanism, transmission)
   output_file: null                           # Auto-named as medmcqa_[hash].json; shared across pipeline stages
   metrics:

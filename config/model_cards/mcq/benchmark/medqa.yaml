@@ -33,7 +33,12 @@ inference:
 # ------------------------------
 evaluation:
   postprocessing: process_mcq_custom         # Parse and extract multiple-choice answer from model output.
-  labels: A, B, C, D, E                      # Option type: A, B, C, D, E
+  # MCQ option type — how process_mcq_custom parses the answer from the model output.
+  # Must be exactly one of the following (letters -> first matching character; words -> first matching word):
+  #   "A, B, C, D, E" | "A, B, C, D" | "A, B, C"
+  #   "Yes, No, Maybe" | "True, False" | "Positive, Negative"
+  # Any other value yields "missing". MedQA uses the 5-option letter form.
+  labels: A, B, C, D, E
   output_file: null  # Will be auto-named as medqa_[hash].json. All pipeline stages update this single file by default.
   metrics:
     - accuracy
