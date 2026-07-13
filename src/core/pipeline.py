@@ -246,30 +246,23 @@ def run_postprocessing(config: Dict[str, Any], inference_output_file: str) -> Li
         # Named entity recognition with custom entity types (TOKEN INDICES)
         from src.evaluation.data_processing import process_ner_token_indices_single
         postprocess_func = lambda text, labels: process_ner_token_indices_single(text, labels)[1]  # Return entities only
-    elif postprocessing == "process_ner_char_offsets":
-        # Named entity recognition with custom entity types (CHARACTER OFFSETS)
-        from src.evaluation.data_processing import process_ner_char_offsets_single
-        # For char offsets, we need the input text, so we handle this differently in the loop below
-        postprocess_func = None
+    elif postprocessing == "load_raw_data":
+        # Generation: raw passthrough (no normalization) so cased metrics match the web app
+        postprocess_func = lambda text, labels: text if text else ""
     else:
         raise ValueError(f"Unknown postprocessing function: {postprocessing}")
     
     # Add postprocessed outputs and references using the selected function
-    if postprocessing == "process_ner_char_offsets":
-        # Special handling for character offsets (needs input)
-        from src.evaluation.data_processing import process_ner_char_offsets_single
-        for rec in records:
-            input = rec.get("input", "")
-            rec["postprocessed_output"] = process_ner_char_offsets_single(rec["output"], label_string, input)[1]
-            # For reference in char offsets, it's already in the correct format
-            rec["postprocessed_reference"] = rec["reference"]
-    elif postprocessing in ["process_ner_custom", "process_ner_token_indices"]:
-        # Special handling for token indices (reference is already in correct format)
+    if postprocessing in ["process_ner_custom", "process_ner_token_indices"]:
+        # NER: parse spans from the output; lowercase reference labels so they
+        # match the (lowercased) parsed predictions, exactly as the web app does.
         from src.evaluation.data_processing import process_ner_token_indices_single
         for rec in records:
             rec["postprocessed_output"] = process_ner_token_indices_single(rec["output"], label_string)[1]
-            # For reference in token indices, it's already in the correct format
-            rec["postprocessed_reference"] = rec["reference"]
+            rec["postprocessed_reference"] = [
+                [sp[0], sp[1], str(sp[2]).lower()] if len(sp) >= 3 else list(sp)
+                for sp in rec["reference"]
+            ]
     else:
         for rec in records:
             rec["postprocessed_output"] = postprocess_func(rec["output"], label_string)

@@ -156,7 +156,7 @@ inference:
 # ------------------------------
 evaluation:
   postprocessing: process_mcq_custom          # Function to parse MCQ model outputs. 
-                                              # Other functions: load_normalized_data | process_ner_token_indices | process_ner_char_offsets | process_mlc_custom
+                                              # Other functions: load_normalized_data | load_raw_data | process_ner_token_indices | process_mlc_custom
   labels: A, B, C, D                          # The parser extracts the first valid option from the model output or returns "missing" if no valid option is found
                                               # A, B, C | A, B, C, D, E | Yes, No, Maybe
                                               # For ner or mlc, specify class labels as comma-separated list (e.g., mechanism, transmission)

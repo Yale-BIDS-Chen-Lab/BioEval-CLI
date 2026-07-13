@@ -32,7 +32,7 @@ inference:
 #  Evaluation Settings
 # ------------------------------
 evaluation:
-  postprocessing: load_normalized_data       # Text normalization: lowercase + strip leading or trailing whitespace
+  postprocessing: load_raw_data              # Raw passthrough (no normalization) so cased metrics match the web app
   labels: null                               # No labels needed for generation tasks
   output_file: null  # Will be auto-named as plos_[hash].json. All pipeline stages update this single file by default.
   metrics:

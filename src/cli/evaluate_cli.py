@@ -47,15 +47,6 @@ def main():
                                      metric=args.metric,
                                      postprocessing=None,
                                      process_json_override=process_json)
-    elif args.postprocessing == "process_ner_char_offsets" and args.label_string:
-        from src.evaluation.data_processing import process_ner_char_offsets
-        process_json = lambda file_path: process_ner_char_offsets(file_path, args.label_string)
-        result_text = evaluate_model(dataset=args.dataset,
-                                     task=args.task,
-                                     json_file=args.input,
-                                     metric=args.metric,
-                                     postprocessing=None,
-                                     process_json_override=process_json)
     else:
         result_text = evaluate_model(dataset=args.dataset,
                                      task=args.task,
