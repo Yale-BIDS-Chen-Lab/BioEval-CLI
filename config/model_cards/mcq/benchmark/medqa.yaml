@@ -37,8 +37,8 @@ evaluation:
   # Must be exactly one of the following (letters -> first matching character; words -> first matching word):
   #   "A, B, C, D, E" | "A, B, C, D" | "A, B, C"
   #   "Yes, No, Maybe" | "True, False" | "Positive, Negative"
-  # Any other value yields "missing". MedQA uses the 5-option letter form.
-  labels: A, B, C, D, E
+  # Any other value yields "missing". MedQA is 4-option — gold answers span A–D.
+  labels: A, B, C, D
   output_file: null  # Will be auto-named as medqa_[hash].json. All pipeline stages update this single file by default.
   metrics:
     - accuracy
